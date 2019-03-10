@@ -3,21 +3,20 @@ import { Link } from 'react-router-dom';
 import { compose } from 'recompose';
 
 import { withStyles } from '@material-ui/core/styles';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import Button from "@material-ui/core/Button";
 
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 import { AuthUserContext } from '../Session';
 import { withFirebase } from '../Firebase';
+
+import styled from 'styled-components';
 
 const styles = {
   root: {
@@ -44,6 +43,15 @@ const Navigation = () => (
   </div >
 )
 
+const Title = styled(Link)`
+  text-decoration: none;
+  color: white;
+`;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+`;
+
 class NavigationAuthBase extends React.Component {
   state = {
     anchorEl: null,
@@ -63,13 +71,10 @@ class NavigationAuthBase extends React.Component {
     return (
       <AppBar position="static">
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-            <Link to={ROUTES.HOME}>
+          <Typography variant="h6" className={classes.grow}>
+            <Title to={ROUTES.HOME}>
               Home Automation
-            </Link>
+            </Title>
           </Typography>
           <IconButton
             aria-owns={open ? 'menu-appbar' : undefined}
@@ -94,11 +99,11 @@ class NavigationAuthBase extends React.Component {
             onClose={this.handleClose}
           >
             <MenuItem onClick={this.handleClose}>
-              <Link to={ROUTES.ACCOUNT}>Account</Link>
+              <StyledLink to={ROUTES.ACCOUNT}>Account</StyledLink>
             </MenuItem>
             <MenuItem onClick={this.handleClose}>
               {authUser.roles.includes(ROLES.ADMIN) && (
-                <Link to={ROUTES.ADMIN}>Admin</Link>
+                <StyledLink to={ROUTES.ADMIN}>Admin</StyledLink>
               )}
             </MenuItem>
             <MenuItem onClick={this.props.firebase.doSignOut}>Sign out</MenuItem>
@@ -111,8 +116,8 @@ class NavigationAuthBase extends React.Component {
 
 const NavigationAuth = compose(
   withStyles(styles),
-  withFirebase)
-  (NavigationAuthBase)
+  withFirebase
+)(NavigationAuthBase)
 
 const NavigationNonAuth = () => (
   <AppBar position="static">

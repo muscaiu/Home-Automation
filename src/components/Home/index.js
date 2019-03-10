@@ -1,13 +1,25 @@
 import React from 'react';
 
 import { withAuthorization } from '../Session';
+import Thermostat from '../Thermostat';
+
 
 const HomePage = () => (
-  <div>
-    <h1>Home Page</h1>
-    <p>The Home Page is accessible by every signed in user.</p>
-  </div>
-);
+
+  <Thermostat
+    minValue="15"
+    maxValue="30"
+    numTicks="50"
+    height="200px"
+    width="200px"
+    away={false}
+    ambientTemperature={23}
+    targetTemperature={22}
+    hvacMode={'heating'}
+    leaf={true}
+  />
+
+)
 
 const condition = authUser => !!authUser;
 
