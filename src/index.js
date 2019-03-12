@@ -7,11 +7,13 @@ import App from './components/App';
 import Firebase, { FirebaseContext } from 'components/Firebase';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
+import green from '@material-ui/core/colors/green';
+
+import "assets/css/material-dashboard-react.css?v=1.6.0";
 
 const theme = createMuiTheme({
   palette: {
-    primary: purple,
+    primary: green,
     secondary: {
       main: '#f44336',
     },
