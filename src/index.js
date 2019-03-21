@@ -8,15 +8,14 @@ import Firebase, { FirebaseContext } from 'components/Firebase';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
+import lime from '@material-ui/core/colors/lime';
 
 import "assets/css/material-dashboard-react.css?v=1.6.0";
 
 const theme = createMuiTheme({
   palette: {
     primary: green,
-    secondary: {
-      main: '#f44336',
-    },
+    secondary: lime
   },
   typography: {
     useNextVariants: true

@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { withAuthorization, AuthUserContext } from '../Session';
-import { ThermostatBase } from '../Thermostat';
 
 import { withStyles } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -12,7 +10,8 @@ import Icon from "@material-ui/core/Icon";
 import Store from "@material-ui/icons/Store";
 import LocalOffer from "@material-ui/icons/LocalOffer";
 import Update from "@material-ui/icons/Update";
-import Accessibility from "@material-ui/icons/Accessibility";
+import Kitchen from "@material-ui/icons/Kitchen";
+import Wc from "@material-ui/icons/Wc";
 
 import Card from "components/Card/Card";
 import GridItem from "components/Grid/GridItem";
@@ -22,6 +21,8 @@ import CardIcon from "components/Card/CardIcon";
 import CardFooter from "components/Card/CardFooter";
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
+import { withAuthorization } from '../Session';
+import { ThermostatBase } from '../Thermostat';
 
 class HomePage extends React.Component {
   state = {
@@ -83,7 +84,7 @@ class HomePage extends React.Component {
               <CardFooter stats>
                 <div className={classes.stats}>
                   Living Room
-            </div>
+                </div>
               </CardFooter>
             </Card>
           </GridItem>
@@ -91,7 +92,7 @@ class HomePage extends React.Component {
             <Card>
               <CardHeader color="info" stats icon>
                 <CardIcon color="info">
-                  <Accessibility />
+                  <Kitchen />
                 </CardIcon>
                 <p className={classes.cardCategory}>Followers</p>
                 <h3 className={classes.cardTitle}>+245</h3>
@@ -99,7 +100,7 @@ class HomePage extends React.Component {
               <CardFooter stats>
                 <div className={classes.stats}>
                   <Update />
-                  Just Updated
+                  Kitchen
                 </div>
               </CardFooter>
             </Card>
@@ -108,27 +109,25 @@ class HomePage extends React.Component {
             <Card>
               <CardHeader color="warning" stats icon>
                 <CardIcon color="warning">
-                  <Icon>content_copy</Icon>
+                  <Icon>child_care</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Used Space</p>
+                <p className={classes.cardCategory}>Temperature</p>
                 <h3 className={classes.cardTitle}>
-                  49/50 <small>GB</small>
+                  22 <small>°C</small>
                 </h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                  <a href="#pablo" onClick={e => e.preventDefault()}>
-                    Get more space
-                  </a>
+                  Vlad's Room
                 </div>
               </CardFooter>
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
             <Card>
-              <CardHeader color="danger" stats icon>
-                <CardIcon color="danger">
-                  <Icon>info_outline</Icon>
+              <CardHeader color="rose" stats icon>
+                <CardIcon color="rose">
+                  <Wc />
                 </CardIcon>
                 <p className={classes.cardCategory}>Fixed Issues</p>
                 <h3 className={classes.cardTitle}>75</h3>
@@ -136,7 +135,7 @@ class HomePage extends React.Component {
               <CardFooter stats>
                 <div className={classes.stats}>
                   <LocalOffer />
-                  Tracked from Github
+                  Bed Room
                 </div>
               </CardFooter>
             </Card>
@@ -151,5 +150,5 @@ const condition = authUser => !!authUser;
 
 export default compose(
   withAuthorization(condition),
-  withStyles(dashboardStyle)
+  withStyles(dashboardStyle),
 )(HomePage);

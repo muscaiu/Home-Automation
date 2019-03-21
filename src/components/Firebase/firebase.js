@@ -62,6 +62,7 @@ class Firebase {
             next(authUser);
           });
       } else {
+        console.log('fallback')
         fallback();
       }
     });
