@@ -1,5 +1,5 @@
 const logger = require('./logger');
 
-const livingTempCron = require('./cron/livingTempCron');
-livingTempCron.start()
-logger.info('livingTempCron cron started');
+const cronLiving = require('./cron/cronLiving');
+cronLiving.start()
+logger.info('cronLiving cron started');
