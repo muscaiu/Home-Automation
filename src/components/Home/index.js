@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import { withStyles } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { compose } from 'recompose';
@@ -24,11 +23,18 @@ import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardS
 import { withAuthorization } from '../Session';
 import { ThermostatBase } from '../Thermostat';
 
+import { subscribeToTimer } from '../../api/client';
+
 class HomePage extends React.Component {
   state = {
     ambientTemperature: 19,
-    targetTemperature: 22
+    targetTemperature: 22,
+    timestamp: 'nothing yet'
   }
+  componentDidMount = () => {
+    subscribeToTimer((err, timestamp) => this.setState({ timestamp }));
+  }
+  
   handleTempIncrement = () => {
     this.setState({ targetTemperature: this.state.targetTemperature + 1 })
   }
@@ -72,6 +78,7 @@ class HomePage extends React.Component {
               </div>
             </Card>
           </GridItem>
+          This is the timer value: {this.state.timestamp}
           <GridItem xs={12} sm={6} md={3}>
             <Card>
               <CardHeader color="success" stats icon>
