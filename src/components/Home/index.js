@@ -23,16 +23,16 @@ import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardS
 import { withAuthorization } from '../Session';
 import { ThermostatBase } from '../Thermostat';
 
-import { subscribeToTimer } from '../../api/client';
+import { subscribeToSensor } from '../../subscribers/subscribeToSensor';
 
 class HomePage extends React.Component {
   state = {
     ambientTemperature: 19,
     targetTemperature: 22,
-    timestamp: 'nothing yet'
+    sensor: ''
   }
   componentDidMount = () => {
-    subscribeToTimer((err, timestamp) => this.setState({ timestamp }));
+    subscribeToSensor(10000, (sensor) => this.setState({sensor}))
   }
   
   handleTempIncrement = () => {
@@ -43,7 +43,7 @@ class HomePage extends React.Component {
   }
   render() {
     const { classes } = this.props;
-    const { ambientTemperature, targetTemperature } = this.state;
+    const { ambientTemperature, targetTemperature, sensor } = this.state;
 
     return (
       <div>
@@ -78,15 +78,18 @@ class HomePage extends React.Component {
               </div>
             </Card>
           </GridItem>
-          This is the timer value: {this.state.timestamp}
           <GridItem xs={12} sm={6} md={3}>
             <Card>
               <CardHeader color="success" stats icon>
                 <CardIcon color="success">
                   <Store />
                 </CardIcon>
-                <p className={classes.cardCategory}>Temperature</p>
-                <p className={classes.cardCategory}>Humidity</p>
+                <h3 className={classes.cardTitle}>
+                  {sensor.temp} °C
+                </h3>
+                <h3 className={classes.cardTitle}>
+                  {sensor.hum} %
+                </h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
