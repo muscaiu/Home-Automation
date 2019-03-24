@@ -41,10 +41,11 @@ class HomePage extends React.Component {
     subscribeToLiving(10000, livingData => this.setState({
       livingData
     }))
-    fetch('http://192.168.1.12/cm?cmnd=Status')
+    // fetch('http://192.168.1.12/cm?cmnd=Status')
+    fetch('http://cassusa.go.ro:3001/api/statusliving')
     .then(response => {
       response.json()
-      .then(data => this.setState({ livingLamp: !!data.Status.Power }));
+      .then(data => this.setState({ livingLamp: !!data.data.Status.Power }));
     })
   }
   
@@ -55,7 +56,7 @@ class HomePage extends React.Component {
     this.setState({ ambientTemperature: this.state.ambientTemperature - 1 })
   }
   handleToggleLiving = () => {
-    fetch('http://localhost:4001/api/toggleLiving')
+    fetch('http://cassusa.go.ro:3001/api/toggleliving')
     // toggleLiving()
     this.setState({ livingLamp: !this.state.livingLamp })
   }
