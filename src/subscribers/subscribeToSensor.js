@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
-// const socket = io.connect('http://localhost:4001', {transports: ['websocket']});
-var socket = io('http://cassusa.go.ro:4001', { transports: ['websocket'] });
+const socket = io.connect('http://localhost:4001', {transports: ['websocket']});
+// var socket = io('http://cassusa.go.ro:4001', { transports: ['websocket'] });
 
 function subscribeToSensor(interval, cb) {
   socket.emit('subscribeToSensor', interval);
@@ -12,7 +12,12 @@ function subscribeToLiving(interval, cb) {
   socket.on('livingData', data => cb(data));
 }
 
+function toggleLiving() {
+  socket.emit('toggleLiving');
+}
+
 export {
   subscribeToSensor,
-  subscribeToLiving
+  subscribeToLiving,
+  toggleLiving
 }

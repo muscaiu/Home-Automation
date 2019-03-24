@@ -23,7 +23,7 @@ import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardS
 import { withAuthorization } from '../Session';
 import { ThermostatBase } from '../Thermostat';
 
-import { subscribeToSensor, subscribeToLiving } from '../../subscribers/subscribeToSensor';
+import { subscribeToSensor, subscribeToLiving, toggleLiving } from '../../subscribers/subscribeToSensor';
 
 class HomePage extends React.Component {
   state = {
@@ -42,12 +42,12 @@ class HomePage extends React.Component {
       livingData
     }))
     fetch('http://192.168.1.12/cm?cmnd=Status')
-      .then(response => {
-        response.json()
-          .then(data => this.setState({ livingLamp: !!data.Status.Power }));
-      })
+    .then(response => {
+      response.json()
+      .then(data => this.setState({ livingLamp: !!data.Status.Power }));
+    })
   }
-
+  
   handleTempIncrement = () => {
     this.setState({ ambientTemperature: this.state.ambientTemperature + 1 })
   }
@@ -55,14 +55,15 @@ class HomePage extends React.Component {
     this.setState({ ambientTemperature: this.state.ambientTemperature - 1 })
   }
   handleToggleLiving = () => {
-    fetch('http://192.168.1.12/cm?cmnd=Power%20TOGGLE')
+    fetch('http://localhost:4001/api/toggleLiving')
+    // toggleLiving()
     this.setState({ livingLamp: !this.state.livingLamp })
   }
 
   render() {
     const { classes } = this.props;
     const { ambientTemperature, targetTemperature, sensor, livingData, livingLamp } = this.state;
-    console.log(livingLamp)
+
     return (
       <div>
         <GridContainer>
