@@ -30,7 +30,8 @@ class HomePage extends React.Component {
     ambientTemperature: 22,
     targetTemperature: 22,
     sensor: '',
-    livingData: ''
+    livingData: '',
+    livingLamp: false
   }
   componentDidMount = () => {
     subscribeToSensor(10000, (sensor) => this.setState({
@@ -40,6 +41,11 @@ class HomePage extends React.Component {
     subscribeToLiving(10000, livingData => this.setState({
       livingData
     }))
+    fetch('http://192.168.1.12/cm?cmnd=Status')
+      .then(response => {
+        response.json()
+          .then(data => this.setState({ livingLamp: !!data.Status.Power }));
+      })
   }
 
   handleTempIncrement = () => {
@@ -48,10 +54,15 @@ class HomePage extends React.Component {
   handleTempDecrement = () => {
     this.setState({ ambientTemperature: this.state.ambientTemperature - 1 })
   }
+  handleToggleLiving = () => {
+    fetch('http://192.168.1.12/cm?cmnd=Power%20TOGGLE')
+    this.setState({ livingLamp: !this.state.livingLamp })
+  }
+
   render() {
     const { classes } = this.props;
-    const { ambientTemperature, targetTemperature, sensor, livingData } = this.state;
-
+    const { ambientTemperature, targetTemperature, sensor, livingData, livingLamp } = this.state;
+    console.log(livingLamp)
     return (
       <div>
         <GridContainer>
@@ -88,8 +99,8 @@ class HomePage extends React.Component {
           <GridItem xs={12} sm={6} md={3}>
             <Card>
               <CardHeader color="success" stats icon>
-                <CardIcon color="success">
-                  <Store />
+                <CardIcon onClick={this.handleToggleLiving} color="success">
+                  <Store color={livingLamp ? "secondary" : 'action'} />
                 </CardIcon>
                 <h3 className={classes.cardTitle}>
                   {livingData.temperature} °C
