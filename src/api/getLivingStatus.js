@@ -15,10 +15,12 @@ async function getLivingStatus() {
     const parseStatus = res.data.split('px\'>')
     const status = parseStatus[1].split('</div')[0]
     const parseTemperatureHumidity = res.data.split('{m}')
-    const temperature = parseInt(parseTemperatureHumidity[1].split('&')[0])
+    const temperature = parseTemperatureHumidity[1].split('&')[0]
+    const humidity = parseTemperatureHumidity[2].split('%')[0]
     return ({
       status,
-      temperature
+      temperature,
+      humidity
     })
   }
   catch (err) {

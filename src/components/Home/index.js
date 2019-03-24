@@ -7,8 +7,8 @@ import IconButton from '@material-ui/core/IconButton';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Icon from "@material-ui/core/Icon";
 import Store from "@material-ui/icons/Store";
-import LocalOffer from "@material-ui/icons/LocalOffer";
-import Update from "@material-ui/icons/Update";
+// import LocalOffer from "@material-ui/icons/LocalOffer";
+// import Update from "@material-ui/icons/Update";
 import Kitchen from "@material-ui/icons/Kitchen";
 import Wc from "@material-ui/icons/Wc";
 
@@ -23,27 +23,34 @@ import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardS
 import { withAuthorization } from '../Session';
 import { ThermostatBase } from '../Thermostat';
 
-import { subscribeToSensor } from '../../subscribers/subscribeToSensor';
+import { subscribeToSensor, subscribeToLiving } from '../../subscribers/subscribeToSensor';
 
 class HomePage extends React.Component {
   state = {
-    ambientTemperature: 19,
+    ambientTemperature: 22,
     targetTemperature: 22,
-    sensor: ''
+    sensor: '',
+    livingData: ''
   }
   componentDidMount = () => {
-    subscribeToSensor(10000, (sensor) => this.setState({sensor}))
+    subscribeToSensor(10000, (sensor) => this.setState({
+      sensor,
+      targetTemperature: parseInt(sensor.temperature)
+    }))
+    subscribeToLiving(10000, livingData => this.setState({
+      livingData
+    }))
   }
-  
+
   handleTempIncrement = () => {
-    this.setState({ targetTemperature: this.state.targetTemperature + 1 })
+    this.setState({ ambientTemperature: this.state.ambientTemperature + 1 })
   }
   handleTempDecrement = () => {
-    this.setState({ targetTemperature: this.state.targetTemperature - 1 })
+    this.setState({ ambientTemperature: this.state.ambientTemperature - 1 })
   }
   render() {
     const { classes } = this.props;
-    const { ambientTemperature, targetTemperature, sensor } = this.state;
+    const { ambientTemperature, targetTemperature, sensor, livingData } = this.state;
 
     return (
       <div>
@@ -85,10 +92,10 @@ class HomePage extends React.Component {
                   <Store />
                 </CardIcon>
                 <h3 className={classes.cardTitle}>
-                  {sensor.temp} °C
+                  {livingData.temperature} °C
                 </h3>
                 <h3 className={classes.cardTitle}>
-                  {sensor.hum} %
+                  {livingData.humidity} %
                 </h3>
               </CardHeader>
               <CardFooter stats>
@@ -100,16 +107,37 @@ class HomePage extends React.Component {
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
             <Card>
+              <CardHeader color="rose" stats icon>
+                <CardIcon color="rose">
+                  <Wc />
+                </CardIcon>
+                <h3 className={classes.cardTitle}>
+                  {sensor.temperature} °C
+                </h3>
+                <h3 className={classes.cardTitle}>
+                  {sensor.humidity} %
+                </h3>
+              </CardHeader>
+              <CardFooter stats>
+                <div className={classes.stats}>
+                  {/* <LocalOffer /> */}
+                  Bed Room
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={6} md={3}>
+            <Card>
               <CardHeader color="info" stats icon>
                 <CardIcon color="info">
                   <Kitchen />
                 </CardIcon>
-                <p className={classes.cardCategory}>Followers</p>
-                <h3 className={classes.cardTitle}>+245</h3>
+                <p className={classes.cardCategory}>Temperature</p>
+                {/* <h3 className={classes.cardTitle}>+245</h3> */}
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                  <Update />
+                  {/* <Update /> */}
                   Kitchen
                 </div>
               </CardFooter>
@@ -123,29 +151,12 @@ class HomePage extends React.Component {
                 </CardIcon>
                 <p className={classes.cardCategory}>Temperature</p>
                 <h3 className={classes.cardTitle}>
-                  22 <small>°C</small>
+                  {/* 22 <small>°C</small> */}
                 </h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
                   Vlad's Room
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={6} md={3}>
-            <Card>
-              <CardHeader color="rose" stats icon>
-                <CardIcon color="rose">
-                  <Wc />
-                </CardIcon>
-                <p className={classes.cardCategory}>Fixed Issues</p>
-                <h3 className={classes.cardTitle}>75</h3>
-              </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <LocalOffer />
-                  Bed Room
                 </div>
               </CardFooter>
             </Card>

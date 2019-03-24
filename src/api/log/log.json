@@ -71,3 +71,66 @@
 {"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 11:36:21"}
 {"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 11:36:30"}
 {"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 11:38:29"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 11:58:00"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 11:58:06"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 12:39:24"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 12:41:15"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 12:41:19"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 12:44:59"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 12:52:12"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 12:52:17"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 13:33:24"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 16:18:08"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 16:18:12"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 16:22:50"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 16:23:28"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 16:51:18"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 16:53:11"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 17:05:48"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 17:06:28"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 17:11:14"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 17:25:31"}
+{"message":"client is subscribing to sensor with interval 10000","level":"info","timestamp":"2019-03-24 17:30:18"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:33:56"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:33:56"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:35:32"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:35:32"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:36:09"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:36:09"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:37:55"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:37:55"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:38:18"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:38:18"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:39:03"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:39:03"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:40:51"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:40:51"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:41:05"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:41:05"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:42:19"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:42:19"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:42:55"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:42:55"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:43:08"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:43:08"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:44:52"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:44:52"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:46:04"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:46:04"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:52:43"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:52:43"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:52:46"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:52:46"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 17:52:49"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 17:52:49"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 18:09:25"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 18:09:25"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 18:09:28"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 18:09:28"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 18:09:33"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 18:09:33"}
+{"message":"client subscribeToSensor with interval 10000","level":"info","timestamp":"2019-03-24 18:09:35"}
+{"message":"client subscribeToLiving with interval 10000","level":"info","timestamp":"2019-03-24 18:09:35"}
+{"message":"socket.io on port, 4001","level":"info","timestamp":"2019-03-24 18:14:48"}
+{"message":"socket.io on port, 4001","level":"info","timestamp":"2019-03-24 18:27:50"}
+{"message":"socket.io on port, 4001","level":"info","timestamp":"2019-03-24 18:30:09"}
