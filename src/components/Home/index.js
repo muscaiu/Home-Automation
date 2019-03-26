@@ -38,7 +38,7 @@ class HomePage extends React.Component {
       sensor,
       targetTemperature: parseInt(sensor.temperature)
     }))
-    subscribeToLiving(10000, livingData => this.setState({
+    subscribeToLiving(20000, livingData => this.setState({
       livingData
     }))
     // fetch('http://192.168.1.12/cm?cmnd=Status')
