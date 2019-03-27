@@ -23,7 +23,11 @@ import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardS
 import { withAuthorization } from '../Session';
 import { ThermostatBase } from '../Thermostat';
 
-import { subscribeToSensor, subscribeToLiving, toggleLiving } from '../../subscribers/subscribeToSensor';
+import {
+  subscribeToSensor,
+  subscribeToLiving,
+  // toggleLiving
+} from '../../subscribers/subscribeToSensor';
 
 class HomePage extends React.Component {
   state = {
@@ -31,30 +35,34 @@ class HomePage extends React.Component {
     targetTemperature: 22,
     sensor: '',
     livingData: '',
-    livingLamp: false
+    livingLamp: false,
+    lastWrite: '',
   }
   componentDidMount = () => {
     subscribeToSensor(10000, (sensor) => this.setState({
       sensor,
-      targetTemperature: parseInt(sensor.temperature)
+      targetTemperature: parseInt(sensor.temperature),
+      lastWrite: sensor.lastWrite
     }))
     subscribeToLiving(20000, livingData => this.setState({
       livingData
     }))
     // fetch('http://192.168.1.12/cm?cmnd=Status')
     fetch('http://cassusa.go.ro:3001/api/statusliving')
-    .then(response => {
-      response.json()
-      .then(data => this.setState({ livingLamp: !!data.data.Status.Power }));
-    })
+      .then(response => {
+        response.json()
+          .then(data => this.setState({ livingLamp: !!data.data.Status.Power }));
+      })
   }
-  
+
   handleTempIncrement = () => {
     this.setState({ ambientTemperature: this.state.ambientTemperature + 1 })
   }
+
   handleTempDecrement = () => {
     this.setState({ ambientTemperature: this.state.ambientTemperature - 1 })
   }
+
   handleToggleLiving = () => {
     fetch('http://cassusa.go.ro:3001/api/toggleliving')
     // toggleLiving()
@@ -63,7 +71,14 @@ class HomePage extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { ambientTemperature, targetTemperature, sensor, livingData, livingLamp } = this.state;
+    const {
+      ambientTemperature,
+      targetTemperature,
+      sensor,
+      livingData,
+      livingLamp,
+      lastWrite
+    } = this.state;
 
     return (
       <div>
@@ -134,7 +149,7 @@ class HomePage extends React.Component {
               <CardFooter stats>
                 <div className={classes.stats}>
                   {/* <LocalOffer /> */}
-                  Bed Room
+                  Bed Room - {lastWrite}
                 </div>
               </CardFooter>
             </Card>

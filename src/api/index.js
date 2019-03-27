@@ -28,7 +28,6 @@ io.on('connection', (client) => {
   });
   //toggle
   client.on('toggle', () => {
-    console.log('toggle')
     axios.get('http://192.168.1.12/cm?cmnd=Power%20TOGGLE')
   });
 
