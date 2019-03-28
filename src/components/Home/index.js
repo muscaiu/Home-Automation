@@ -83,36 +83,6 @@ class HomePage extends React.Component {
     return (
       <div>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={12}>
-            <Card >
-              <CardActionArea className={classes.thermostatCard}>
-                <ThermostatBase
-                  minValue="15"
-                  maxValue="30"
-                  numTicks="50"
-                  height="200px"
-                  width="200px"
-                  away={false}
-                  ambientTemperature={ambientTemperature}
-                  targetTemperature={targetTemperature}
-                  hvacMode={'off'}
-                  leaf={true}
-                />
-              </CardActionArea>
-              <div className={classes.thermostatCard}>
-                <IconButton onClick={this.handleTempIncrement}>
-                  <SvgIcon>
-                    <path fill='#9C27B0' d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />
-                  </SvgIcon>
-                </IconButton>
-                <IconButton onClick={this.handleTempDecrement}>
-                  <SvgIcon>
-                    <path fill='#9C27B0' d="M0 10h24v4h-24z" />
-                  </SvgIcon>
-                </IconButton>
-              </div>
-            </Card>
-          </GridItem>
           <GridItem xs={12} sm={6} md={3}>
             <Card>
               <CardHeader color="success" stats icon>
@@ -187,6 +157,36 @@ class HomePage extends React.Component {
                   Vlad's Room
                 </div>
               </CardFooter>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={12}>
+            <Card >
+              <CardActionArea className={classes.thermostatCard}>
+                <ThermostatBase
+                  minValue="15"
+                  maxValue="30"
+                  numTicks="50"
+                  height="200px"
+                  width="200px"
+                  away={false}
+                  ambientTemperature={ambientTemperature}
+                  targetTemperature={targetTemperature}
+                  hvacMode={'off'}
+                  leaf={true}
+                />
+              </CardActionArea>
+              <div className={classes.thermostatCard}>
+                <IconButton onClick={this.handleTempIncrement}>
+                  <SvgIcon>
+                    <path fill='#9C27B0' d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />
+                  </SvgIcon>
+                </IconButton>
+                <IconButton onClick={this.handleTempDecrement}>
+                  <SvgIcon>
+                    <path fill='#9C27B0' d="M0 10h24v4h-24z" />
+                  </SvgIcon>
+                </IconButton>
+              </div>
             </Card>
           </GridItem>
         </GridContainer>
