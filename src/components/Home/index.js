@@ -31,7 +31,7 @@ import {
 
 class HomePage extends React.Component {
   state = {
-    ambientTemperature: 22,
+    ambientTemperature: 23,
     targetTemperature: 22,
     sensor: '',
     livingData: '',
