@@ -11,6 +11,7 @@ const cronLiving = require('./cron/cronLiving');
 const cronBedroom = require('./cron/cronBedroom');
 const getLivingStatus = require('./getLivingStatus')
 const getBedroomData = require('./getBedroomData');
+const { messaging } = require('./firebaseRefs');
 
 //Hourly Temp Humidity and Status
 cronLiving.start();
@@ -37,6 +38,33 @@ io.on('connection', (client) => {
     setInterval(() => {
       getBedroomData().then(data => client.emit('sensor', data));
     }, interval);
+
+    const message = {
+      data: {
+        score: '850',
+        time: '2:45'
+      },
+      token: 'e_3cLAb3BAI:APA91bFFTTMEKbVj4gSK-Ax1o52PopWf1xRO6dZGYUddD_NDWcehbsBQpO3RdV-63G2HvoGvnRju68JuVfT5fSHGKledrLZ29UB91f7hf97FyYOu1XkOg737QBnd93J9OemvsiO7IpDY'
+    };
+
+    // const notification = {
+    //   to: 'e_3cLAb3BAI:APA91bFFTTMEKbVj4gSK-Ax1o52PopWf1xRO6dZGYUddD_NDWcehbsBQpO3RdV-63G2HvoGvnRju68JuVfT5fSHGKledrLZ29UB91f7hf97FyYOu1XkOg737QBnd93J9OemvsiO7IpDY',
+    //   notification: {
+    //     title: "hello",
+    //     title: "world",
+    //   }
+    // };
+
+    messaging
+      .send(message)
+      .then((response) => {
+        console.log('Successfully sent message:', response);
+      })
+      .catch((error) => {
+        console.log('Error sending message:', error);
+      });
+
+
   });
 });
 

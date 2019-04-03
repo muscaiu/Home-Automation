@@ -20,6 +20,7 @@ import CardIcon from "components/Card/CardIcon";
 import CardFooter from "components/Card/CardFooter";
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
+import { withFirebase } from '../Firebase';
 import { withAuthorization } from '../Session';
 import { ThermostatBase } from '../Thermostat';
 
@@ -53,6 +54,8 @@ class HomePage extends React.Component {
         response.json()
           .then(data => this.setState({ livingLamp: !!data.data.Status.Power }));
       })
+
+    this.props.firebase.initializePushNotifications()
   }
 
   handleTempIncrement = () => {
@@ -198,6 +201,7 @@ class HomePage extends React.Component {
 const condition = authUser => !!authUser;
 
 export default compose(
+  withFirebase,
   withAuthorization(condition),
   withStyles(dashboardStyle),
 )(HomePage);

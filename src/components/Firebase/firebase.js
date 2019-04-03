@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/messaging';
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -22,6 +23,7 @@ class Firebase {
 
     this.auth = app.auth();
     this.db = app.database();
+    this.messaging = app.messaging();
   }
 
   // *** Auth API ***
@@ -77,6 +79,42 @@ class Firebase {
   message = uid => this.db.ref(`messages/${uid}`);
 
   messages = () => this.db.ref('messages');
+
+  // *** Push notifications ***
+  initializePushNotifications = () => {
+    // const messaging = firebase.messaging();
+    this.messaging
+      .requestPermission()
+      .then(() => {
+        console.log("Have Permission");
+        return this.messaging.getToken();
+      })
+      .then(token => {
+        console.log("FCM Token:", token);
+        //you probably want to send your new found FCM token to the
+        //application server so that they can send any push
+        //notification to you.
+      })
+      .catch(error => {
+        if (error.code === "messaging/permission-blocked") {
+          console.log("Please Unblock Notification Request Manually");
+        } else {
+          console.log("Error Occurred", error);
+        }
+      });
+
+    this.messaging.onMessage(function (payload) {
+      console.log('onMessage', payload)
+    })
+
+    // this.messaging.setBackgroundMessageHandler(function (payload) {
+    //   const title = 'de title';
+    //   const options = {
+    //     body: payload.data.status
+    //   }
+    //   return self.registration.showNotification(title, options);
+    // })
+  }
 }
 
 export default Firebase;
