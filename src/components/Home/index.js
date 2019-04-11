@@ -40,14 +40,21 @@ class HomePage extends React.Component {
     lastWrite: '',
   }
   componentDidMount = () => {
-    subscribeToSensor(10000, (sensor) => this.setState({
-      sensor,
-      targetTemperature: parseInt(sensor.temperature),
-      lastWrite: sensor.lastWrite
-    }))
-    subscribeToLiving(10000, livingData => this.setState({
-      livingData
-    }))
+
+    subscribeToSensor(10000, sensor => {
+      this.setState({
+        sensor,
+        targetTemperature: parseInt(sensor.temperature),
+        lastWrite: sensor.lastWrite
+      })
+    })
+
+    subscribeToLiving(10000, livingData => {
+      this.setState({
+        livingData
+      })
+    })
+
     // fetch('http://192.168.1.12/cm?cmnd=Status')
     fetch('http://cassusa.go.ro:3001/api/statusliving')
       .then(response => {
@@ -82,7 +89,7 @@ class HomePage extends React.Component {
       livingLamp,
       lastWrite
     } = this.state;
-    console.log(this.state)
+
     return (
       <div>
         <GridContainer>

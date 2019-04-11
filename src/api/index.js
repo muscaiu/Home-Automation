@@ -1,11 +1,4 @@
 const io = require('socket.io')();
-// const axios = require('axios');
-// const express = require('express');
-// const bodyParser = require('body-parser');
-// const cors = require('cors');
-// const app = express();
-// const router = express.Router();
-
 const logger = require('./logger');
 const cronLiving = require('./cron/cronLiving');
 const cronBedroom = require('./cron/cronBedroom');
@@ -22,19 +15,31 @@ io.set("origins", "*:*");
 io.on('connection', (client) => {
   //BedRoom
   client.on('subscribeToSensor', (interval) => {
-    getBedroomData().then(data => client.emit('sensor', data));
+    getBedroomData().then(data => {
+      console.log('initial getBedroomData', data)
+      data && client.emit('sensor', data)
+    });
+
     setInterval(() => {
       getBedroomData()
-      .then(data => client.emit('sensor', data));
+        .then(data => {
+          console.log('+++++ getBedroomData', data)
+          data && client.emit('sensor', data)
+        });
     }, interval);
   });
-  
+
   //Living
   client.on('subscribeToLiving', (interval) => {
-    getLivingStatus().then(data => client.emit('livingData', data));
+    getLivingStatus()
+      .then(data => {
+        client.emit('livingData', data)
+      });
     setInterval(() => {
       getLivingStatus()
-        .then(data => client.emit('livingData', data));
+        .then(data => {
+          client.emit('livingData', data)
+        });
     }, interval);
   });
   //toggle
