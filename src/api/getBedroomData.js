@@ -15,7 +15,7 @@ async function getBedroomData() {
     }
   }
   catch (err) {
-    logger.err(err);
+    console.log(err);
   }
 }
 

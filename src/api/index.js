@@ -20,63 +20,47 @@ cronBedroom.start();
 io.set("origins", "*:*");
 
 io.on('connection', (client) => {
+  //BedRoom
+  client.on('subscribeToSensor', (interval) => {
+    getBedroomData().then(data => client.emit('sensor', data));
+    setInterval(() => {
+      getBedroomData()
+      .then(data => client.emit('sensor', data));
+    }, interval);
+  });
+  
   //Living
   client.on('subscribeToLiving', (interval) => {
     getLivingStatus().then(data => client.emit('livingData', data));
     setInterval(() => {
-      getLivingStatus().then(data => client.emit('livingData', data));
+      getLivingStatus()
+        .then(data => client.emit('livingData', data));
     }, interval);
   });
   //toggle
   client.on('toggle', () => {
     axios.get('http://192.168.1.12/cm?cmnd=Power%20TOGGLE')
   });
-
-  //BedRoom
-  client.on('subscribeToSensor', (interval) => {
-    getBedroomData().then(data => client.emit('sensor', data));
-    setInterval(() => {
-      getBedroomData().then(data => client.emit('sensor', data));
-    }, interval);
-  });
 });
 
-
-const registrationToken = 'e_3cLAb3BAI:APA91bFFTTMEKbVj4gSK-Ax1o52PopWf1xRO6dZGYUddD_NDWcehbsBQpO3RdV-63G2HvoGvnRju68JuVfT5fSHGKledrLZ29UB91f7hf97FyYOu1XkOg737QBnd93J9OemvsiO7IpDY'
-var payload = {
-  notification: {
-    title: "This is a Notification",
-    body: "This is the body of the notification message."
-  }
-};
-var options = {
-  priority: "high",
-  timeToLive: 60 * 60 * 24
-};
-
-messaging.sendToDevice(registrationToken, payload, options)
-  .then(function (response) {
-    console.log("Successfully sent message:", response);
-  })
-  .catch(function (error) {
-    console.log("Error sending message:", error);
-  });
-
-// const message = {
-//   data: {
-//     score: '850',
-//     time: '2:45'
-//   },
-//   token: 'e_3cLAb3BAI:APA91bFFTTMEKbVj4gSK-Ax1o52PopWf1xRO6dZGYUddD_NDWcehbsBQpO3RdV-63G2HvoGvnRju68JuVfT5fSHGKledrLZ29UB91f7hf97FyYOu1XkOg737QBnd93J9OemvsiO7IpDY'
+// const registrationToken = 'e_3cLAb3BAI:APA91bFFTTMEKbVj4gSK-Ax1o52PopWf1xRO6dZGYUddD_NDWcehbsBQpO3RdV-63G2HvoGvnRju68JuVfT5fSHGKledrLZ29UB91f7hf97FyYOu1XkOg737QBnd93J9OemvsiO7IpDY'
+// var payload = {
+//   notification: {
+//     title: "This is a Notification",
+//     body: "This is the body of the notification message."
+//   }
+// };
+// var options = {
+//   priority: "high",
+//   timeToLive: 60 * 60 * 24
 // };
 
-// messaging
-//   .send(message)
-//   .then((response) => {
-//     console.log('Successfully sent message:', response);
+// messaging.sendToDevice(registrationToken, payload, options)
+//   .then(function (response) {
+//     console.log("Successfully sent message:", response);
 //   })
-//   .catch((error) => {
-//     console.log('Error sending message:', error);
+//   .catch(function (error) {
+//     console.log("Error sending message:", error);
 //   });
 
 const port = 4001;

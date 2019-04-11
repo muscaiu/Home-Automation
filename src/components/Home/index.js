@@ -45,7 +45,7 @@ class HomePage extends React.Component {
       targetTemperature: parseInt(sensor.temperature),
       lastWrite: sensor.lastWrite
     }))
-    subscribeToLiving(20000, livingData => this.setState({
+    subscribeToLiving(10000, livingData => this.setState({
       livingData
     }))
     // fetch('http://192.168.1.12/cm?cmnd=Status')
@@ -55,7 +55,7 @@ class HomePage extends React.Component {
           .then(data => this.setState({ livingLamp: !!data.data.Status.Power }));
       })
 
-    this.props.firebase.initializePushNotifications()
+    // this.props.firebase.initializePushNotifications()
   }
 
   handleTempIncrement = () => {
@@ -82,7 +82,7 @@ class HomePage extends React.Component {
       livingLamp,
       lastWrite
     } = this.state;
-
+    console.log(this.state)
     return (
       <div>
         <GridContainer>

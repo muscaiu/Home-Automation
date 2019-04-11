@@ -1,7 +1,5 @@
 const axios = require('axios');
 
-const logger = require('./logger');
-
 async function getLivingStatus() {
   try {
     let res = await axios({
@@ -24,7 +22,7 @@ async function getLivingStatus() {
     })
   }
   catch (err) {
-    logger.err(err);
+    console.log(err);
   }
 }
 

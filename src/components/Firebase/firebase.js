@@ -23,7 +23,7 @@ class Firebase {
 
     this.auth = app.auth();
     this.db = app.database();
-    this.messaging = app.messaging();
+    // this.messaging = app.messaging();
   }
 
   // *** Auth API ***
@@ -81,31 +81,31 @@ class Firebase {
   messages = () => this.db.ref('messages');
 
   // *** Push notifications ***
-  initializePushNotifications = () => {
-    // const messaging = firebase.messaging();
-    this.messaging
-      .requestPermission()
-      .then(() => {
-        console.log("Have Permission");
-        return this.messaging.getToken();
-      })
-      .then(token => {
-        console.log("FCM Token:", token);
-        //you probably want to send your new found FCM token to the
-        //application server so that they can send any push
-        //notification to you.
-      })
-      .catch(error => {
-        if (error.code === "messaging/permission-blocked") {
-          console.log("Please Unblock Notification Request Manually");
-        } else {
-          console.log("Error Occurred", error);
-        }
-      });
+  // initializePushNotifications = () => {
+  //   // const messaging = firebase.messaging();
+  //   this.messaging
+  //     .requestPermission()
+  //     .then(() => {
+  //       console.log("Have Permission");
+  //       return this.messaging.getToken();
+  //     })
+  //     .then(token => {
+  //       console.log("FCM Token:", token);
+  //       //you probably want to send your new found FCM token to the
+  //       //application server so that they can send any push
+  //       //notification to you.
+  //     })
+  //     .catch(error => {
+  //       if (error.code === "messaging/permission-blocked") {
+  //         console.log("Please Unblock Notification Request Manually");
+  //       } else {
+  //         console.log("Error Occurred", error);
+  //       }
+  //     });
 
-    this.messaging.onMessage(function (payload) {
-      console.log('onMessage', payload)
-    })
+    // this.messaging.onMessage(function (payload) {
+    //   console.log('onMessage', payload)
+    // })
 
     // this.messaging.setBackgroundMessageHandler(function (payload) {
     //   const title = 'de title';
@@ -114,7 +114,7 @@ class Firebase {
     //   }
     //   return self.registration.showNotification(title, options);
     // })
-  }
+  // }
 }
 
 export default Firebase;
