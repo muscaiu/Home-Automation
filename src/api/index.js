@@ -3,8 +3,11 @@ const logger = require('./logger');
 const cronLiving = require('./cron/cronLiving');
 const cronBedroom = require('./cron/cronBedroom');
 const getLivingStatus = require('./getLivingStatus')
-const getBedroomData = require('./getBedroomData');
+// const getBedroomData = require('./getBedroomData');
 const { messaging } = require('./firebaseRefs');
+
+const { Scanner } = require("homebridge-mi-hygrothermograph/lib/scanner");
+const scanner = new Scanner();
 
 //Hourly Temp Humidity and Status
 cronLiving.start();
@@ -14,19 +17,15 @@ io.set("origins", "*:*");
 
 io.on('connection', (client) => {
   //BedRoom
-  client.on('subscribeToSensor', (interval) => {
-    getBedroomData().then(data => {
-      console.log('initial getBedroomData', data)
-      data && client.emit('sensor', data)
+  client.on('subscribeToTemperature', () => {
+    scanner.on("temperatureChange", function (temperature, peripheral) {
+      client.emit('temperature', temperature)
     });
-
-    setInterval(() => {
-      getBedroomData()
-        .then(data => {
-          console.log('+++++ getBedroomData', data)
-          data && client.emit('sensor', data)
-        });
-    }, interval);
+  });
+  client.on('subscribeToHumidity', () => {
+    scanner.on("humidityChange", function (humidity, peripheral) {
+      client.emit('humidity', humidity)
+    });
   });
 
   //Living

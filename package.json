@@ -13,6 +13,7 @@
     "express": "^4.16.4",
     "firebase": "^5.8.5",
     "firebase-admin": "^7.0.0",
+    "homebridge-mi-hygrothermograph": "^2.2.1",
     "http": "0.0.0",
     "npm": "^6.9.0",
     "react": "^16.8.4",

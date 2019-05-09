@@ -25,7 +25,8 @@ import { withAuthorization } from '../Session';
 import { ThermostatBase } from '../Thermostat';
 
 import {
-  subscribeToSensor,
+  subscribeToTemperature,
+  subscribeToHumidity,
   subscribeToLiving,
   // toggleLiving
 } from '../../subscribers/subscribeToSensor';
@@ -34,22 +35,27 @@ class HomePage extends React.Component {
   state = {
     ambientTemperature: 23,
     targetTemperature: 22,
-    sensor: '',
+    // sensor: '',
+    temperature: 23,
+    humidity: 45,
     livingData: '',
     livingLamp: false,
-    lastWrite: '',
   }
   componentDidMount = () => {
 
-    subscribeToSensor(10000, sensor => {
+    subscribeToTemperature(null, temperature => {
       this.setState({
-        sensor,
-        targetTemperature: parseInt(sensor.temperature),
-        lastWrite: sensor.lastWrite
+        temperature,
+        targetTemperature: parseInt(temperature),
+      })
+    })
+    subscribeToHumidity(null, humidity => {
+      this.setState({
+        humidity,
       })
     })
 
-    subscribeToLiving(10000, livingData => {
+    subscribeToLiving(20000, livingData => {
       this.setState({
         livingData
       })
@@ -84,10 +90,11 @@ class HomePage extends React.Component {
     const {
       ambientTemperature,
       targetTemperature,
-      sensor,
+      // sensor,
+      temperature,
+      humidity,
       livingData,
       livingLamp,
-      lastWrite
     } = this.state;
 
     return (
@@ -150,16 +157,16 @@ class HomePage extends React.Component {
                   <Wc />
                 </CardIcon>
                 <h3 className={classes.cardTitle}>
-                  {sensor.temperature} °C
+                  {temperature} °C
                 </h3>
                 <h3 className={classes.cardTitle}>
-                  {sensor.humidity} %
+                  {humidity} %
                 </h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
                   {/* <LocalOffer /> */}
-                  Bed Room - {lastWrite}
+                  Bed Room
                 </div>
               </CardFooter>
             </Card>
