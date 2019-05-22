@@ -36,23 +36,38 @@ class HomePage extends React.Component {
     ambientTemperature: 23,
     targetTemperature: 22,
     // sensor: '',
-    temperature: 23,
-    humidity: 45,
+    temperatureBedroom: '',
+    temperatureKitchen: '',
+    temperatureVlad: '',
+    humidityBedroom: '',
+    humidityKitchen: '',
+    humidityVlad: '',
     livingData: '',
     livingLamp: false,
   }
   componentDidMount = () => {
-
-    subscribeToTemperature(null, temperature => {
-      this.setState({
-        temperature,
-        targetTemperature: parseInt(temperature),
-      })
+    subscribeToTemperature(null, data => {
+      const { temperatureBedroom, temperatureKitchen, temperatureVlad } = data;
+      if (temperatureBedroom) {
+        this.setState({
+          temperatureBedroom,
+          targetTemperature: parseInt(temperatureBedroom),
+        })
+      } else if (temperatureKitchen) {
+        this.setState({ temperatureKitchen })
+      } else if (temperatureVlad) {
+        this.setState({ temperatureVlad })
+      }
     })
-    subscribeToHumidity(null, humidity => {
-      this.setState({
-        humidity,
-      })
+    subscribeToHumidity(null, data => {
+      const { humidityBedroom, humidityKitchen, humidityVlad } = data;
+      if (humidityBedroom) {
+        this.setState({ humidityBedroom })
+      } else if (humidityKitchen) {
+        this.setState({ humidityKitchen })
+      } else if (humidityVlad) {
+        this.setState({ humidityVlad })
+      }
     })
 
     subscribeToLiving(20000, livingData => {
@@ -91,8 +106,12 @@ class HomePage extends React.Component {
       ambientTemperature,
       targetTemperature,
       // sensor,
-      temperature,
-      humidity,
+      temperatureBedroom,
+      temperatureKitchen,
+      temperatureVlad,
+      humidityBedroom,
+      humidityKitchen,
+      humidityVlad,
       livingData,
       livingLamp,
     } = this.state;
@@ -157,10 +176,10 @@ class HomePage extends React.Component {
                   <Wc />
                 </CardIcon>
                 <h3 className={classes.cardTitle}>
-                  {temperature} °C
+                  {temperatureBedroom} °C
                 </h3>
                 <h3 className={classes.cardTitle}>
-                  {humidity} %
+                  {humidityBedroom} %
                 </h3>
               </CardHeader>
               <CardFooter stats>
@@ -177,8 +196,12 @@ class HomePage extends React.Component {
                 <CardIcon color="info">
                   <Kitchen />
                 </CardIcon>
-                <p className={classes.cardCategory}>Temperature</p>
-                {/* <h3 className={classes.cardTitle}>+245</h3> */}
+                <h3 className={classes.cardTitle}>
+                  {temperatureKitchen} °C
+                </h3>
+                <h3 className={classes.cardTitle}>
+                  {humidityKitchen} %
+                </h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
@@ -194,9 +217,11 @@ class HomePage extends React.Component {
                 <CardIcon color="warning">
                   <Icon>child_care</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Temperature</p>
                 <h3 className={classes.cardTitle}>
-                  {/* 22 <small>°C</small> */}
+                  {temperatureVlad} °C
+                </h3>
+                <h3 className={classes.cardTitle}>
+                  {humidityVlad} %
                 </h3>
               </CardHeader>
               <CardFooter stats>

@@ -15,16 +15,32 @@ cronBedroom.start();
 
 io.set("origins", "*:*");
 
+const bedroomId = '4c65a8daa726'
+const kitchenId = '4c65a8dd7c37'
+const vladId = '4c65a8dae1b7'
+
 io.on('connection', (client) => {
   //BedRoom
   client.on('subscribeToTemperature', () => {
     scanner.on("temperatureChange", function (temperature, peripheral) {
-      client.emit('temperature', temperature)
+      if (peripheral.id === bedroomId) {
+        client.emit('temperatureBedroom', temperature)
+      } else if (peripheral.id === kitchenId) {
+        client.emit('temperatureKitchen', temperature)
+      } else if (peripheral.id === vladId) {
+        client.emit('temperatureVlad', temperature)
+      }
     });
   });
   client.on('subscribeToHumidity', () => {
     scanner.on("humidityChange", function (humidity, peripheral) {
-      client.emit('humidity', humidity)
+      if (peripheral.id === bedroomId) {
+        client.emit('humidityBedroom', humidity)
+      } else if (peripheral.id === kitchenId) {
+        client.emit('humidityKitchen', humidity)
+      } else if (peripheral.id === vladId) {
+        client.emit('humidityVlad', humidity)
+      }
     });
   });
 
