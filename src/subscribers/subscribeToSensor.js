@@ -7,25 +7,17 @@ function subscribeToTemperature(interval, cb) {
   socket.on('temperatureBedroom', data => cb({ temperatureBedroom: data }));
   socket.on('temperatureKitchen', data => cb({ temperatureKitchen: data }));
   socket.on('temperatureVlad', data => cb({ temperatureVlad: data }));
+  socket.on('temperatureLiving', data => cb({ temperatureLiving: data }));
 }
 function subscribeToHumidity(interval, cb) {
   socket.emit('subscribeToHumidity', interval);
   socket.on('humidityBedroom', data => cb({ humidityBedroom: data }));
   socket.on('humidityKitchen', data => cb({ humidityKitchen: data }));
   socket.on('humidityVlad', data => cb({ humidityVlad: data }));
-}
-function subscribeToLiving(interval, cb) {
-  socket.emit('subscribeToLiving', interval);
-  socket.on('livingData', data => cb(data));
-}
-
-function toggleLiving() {
-  socket.emit('toggleLiving');
+  socket.on('humidityLiving', data => cb({ humidityLiving: data }));
 }
 
 export {
   subscribeToTemperature,
   subscribeToHumidity,
-  subscribeToLiving,
-  toggleLiving
 }

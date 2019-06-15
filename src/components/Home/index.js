@@ -27,7 +27,6 @@ import { ThermostatBase } from '../Thermostat';
 import {
   subscribeToTemperature,
   subscribeToHumidity,
-  subscribeToLiving,
   // toggleLiving
 } from '../../subscribers/subscribeToSensor';
 
@@ -39,15 +38,15 @@ class HomePage extends React.Component {
     temperatureBedroom: '',
     temperatureKitchen: '',
     temperatureVlad: '',
+    temperatureLiving: '',
     humidityBedroom: '',
     humidityKitchen: '',
     humidityVlad: '',
-    livingData: '',
-    livingLamp: false,
+    humidityLiving: '',
   }
   componentDidMount = () => {
     subscribeToTemperature(null, data => {
-      const { temperatureBedroom, temperatureKitchen, temperatureVlad } = data;
+      const { temperatureBedroom, temperatureKitchen, temperatureVlad, temperatureLiving } = data;
       if (temperatureBedroom) {
         this.setState({
           temperatureBedroom,
@@ -57,31 +56,22 @@ class HomePage extends React.Component {
         this.setState({ temperatureKitchen })
       } else if (temperatureVlad) {
         this.setState({ temperatureVlad })
+      } else if (temperatureLiving) {
+        this.setState({ temperatureLiving })
       }
     })
     subscribeToHumidity(null, data => {
-      const { humidityBedroom, humidityKitchen, humidityVlad } = data;
+      const { humidityBedroom, humidityKitchen, humidityVlad, humidityLiving } = data;
       if (humidityBedroom) {
         this.setState({ humidityBedroom })
       } else if (humidityKitchen) {
         this.setState({ humidityKitchen })
       } else if (humidityVlad) {
         this.setState({ humidityVlad })
+      } else if (humidityLiving) {
+        this.setState({ humidityLiving })
       }
     })
-
-    subscribeToLiving(20000, livingData => {
-      this.setState({
-        livingData
-      })
-    })
-
-    // fetch('http://192.168.1.12/cm?cmnd=Status')
-    fetch('http://cassusa.go.ro:3001/api/statusliving')
-      .then(response => {
-        response.json()
-          .then(data => this.setState({ livingLamp: !!data.data.Status.Power }));
-      })
 
     // this.props.firebase.initializePushNotifications()
   }
@@ -94,12 +84,6 @@ class HomePage extends React.Component {
     this.setState({ ambientTemperature: this.state.ambientTemperature - 1 })
   }
 
-  handleToggleLiving = () => {
-    fetch('http://cassusa.go.ro:3001/api/toggleliving')
-    // toggleLiving()
-    this.setState({ livingLamp: !this.state.livingLamp })
-  }
-
   render() {
     const { classes } = this.props;
     const {
@@ -109,11 +93,11 @@ class HomePage extends React.Component {
       temperatureBedroom,
       temperatureKitchen,
       temperatureVlad,
+      temperatureLiving,
       humidityBedroom,
       humidityKitchen,
       humidityVlad,
-      livingData,
-      livingLamp,
+      humidityLiving,
     } = this.state;
 
     return (
@@ -153,13 +137,13 @@ class HomePage extends React.Component {
             <Card>
               <CardHeader color="success" stats icon>
                 <CardIcon onClick={this.handleToggleLiving} color="success">
-                  <Store color={livingLamp ? "secondary" : 'action'} />
+                  <Store />
                 </CardIcon>
                 <h3 className={classes.cardTitle}>
-                  {livingData.temperature} °C
+                  {temperatureLiving} °C
                 </h3>
                 <h3 className={classes.cardTitle}>
-                  {livingData.humidity} %
+                  {humidityLiving} %
                 </h3>
               </CardHeader>
               <CardFooter stats>
