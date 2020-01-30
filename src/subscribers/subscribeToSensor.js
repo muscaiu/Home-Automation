@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 // const socket = io.connect('http://localhost:4001', {transports: ['websocket']});
-var socket = io('http://192.168.100.100:4001', { transports: ['websocket'] });
+var socket = io('http://muscaiu.go.ro:4001', { transports: ['websocket'] });
 
 function subscribeToTemperature(cb) {
   socket.on('temperatureBathroom', data => cb({ temperatureBathroom: data }));

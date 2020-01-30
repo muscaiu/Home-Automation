@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 // const socket = io.connect('http://localhost:4001', {transports: ['websocket']});
-var socket = io('http:muscaiu.go.ro:4001', { transports: ['websocket'] });
+var socket = io('http://muscaiu.go.ro:4001', { transports: ['websocket'] });
 
 function subscribeToBathroom(interval, cb) {
   socket.emit('subscribeToBathroom', interval);
