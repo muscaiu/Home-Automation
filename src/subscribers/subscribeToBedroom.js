@@ -1,10 +1,10 @@
 import io from 'socket.io-client';
 // const socket = io.connect('http://localhost:4001', {transports: ['websocket']});
-var socket = io('http://cassusa.go.ro:4001', { transports: ['websocket'] });
+var socket = io('http:muscaiu.go.ro:4001', { transports: ['websocket'] });
 
-function subscribeToBedroom(interval, cb) {
-  socket.emit('subscribeToBedroom', interval);
-  socket.on('bedroomData', data => cb(data));
+function subscribeToBathroom(interval, cb) {
+  socket.emit('subscribeToBathroom', interval);
+  socket.on('bathroomData', data => cb(data));
 }
 
 function subscribeToLiving(interval, cb) {
@@ -17,7 +17,7 @@ function toggleLiving() {
 }
 
 export {
-  subscribeToBedroom,
+  subscribeToBathroom,
   subscribeToLiving,
   toggleLiving
 }

@@ -27,43 +27,43 @@ import { ThermostatBase } from '../Thermostat';
 import {
   subscribeToTemperature,
   subscribeToHumidity,
-  // toggleLiving
+  toggleLiving
 } from '../../subscribers/subscribeToSensor';
 
 class HomePage extends React.Component {
   state = {
-    ambientTemperature: 23,
+    ambientTemperature: 22,
     targetTemperature: 22,
     // sensor: '',
-    temperatureBedroom: '',
+    temperatureBathroom: '',
     temperatureKitchen: '',
     temperatureVlad: '',
     temperatureLiving: '',
-    humidityBedroom: '',
+    humidityBathroom: '',
     humidityKitchen: '',
     humidityVlad: '',
     humidityLiving: '',
   }
   componentDidMount = () => {
-    subscribeToTemperature(null, data => {
-      const { temperatureBedroom, temperatureKitchen, temperatureVlad, temperatureLiving } = data;
-      if (temperatureBedroom) {
-        this.setState({
-          temperatureBedroom,
-          targetTemperature: parseInt(temperatureBedroom),
-        })
+    subscribeToTemperature(data => {
+      const { temperatureBathroom, temperatureKitchen, temperatureVlad, temperatureLiving } = data;
+      if (temperatureBathroom) {
+        this.setState({ temperatureBathroom })
       } else if (temperatureKitchen) {
         this.setState({ temperatureKitchen })
       } else if (temperatureVlad) {
         this.setState({ temperatureVlad })
       } else if (temperatureLiving) {
-        this.setState({ temperatureLiving })
+        this.setState({
+          temperatureLiving,
+          targetTemperature: parseInt(temperatureLiving),
+        })
       }
     })
-    subscribeToHumidity(null, data => {
-      const { humidityBedroom, humidityKitchen, humidityVlad, humidityLiving } = data;
-      if (humidityBedroom) {
-        this.setState({ humidityBedroom })
+    subscribeToHumidity(data => {
+      const { humidityBathroom, humidityKitchen, humidityVlad, humidityLiving } = data;
+      if (humidityBathroom) {
+        this.setState({ humidityBathroom })
       } else if (humidityKitchen) {
         this.setState({ humidityKitchen })
       } else if (humidityVlad) {
@@ -84,17 +84,21 @@ class HomePage extends React.Component {
     this.setState({ ambientTemperature: this.state.ambientTemperature - 1 })
   }
 
+  handleToggleLiving = () => {
+    toggleLiving();
+  }
+
   render() {
     const { classes } = this.props;
     const {
       ambientTemperature,
       targetTemperature,
       // sensor,
-      temperatureBedroom,
+      temperatureBathroom,
       temperatureKitchen,
       temperatureVlad,
       temperatureLiving,
-      humidityBedroom,
+      humidityBathroom,
       humidityKitchen,
       humidityVlad,
       humidityLiving,
@@ -155,27 +159,6 @@ class HomePage extends React.Component {
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
             <Card>
-              <CardHeader color="rose" stats icon>
-                <CardIcon color="rose">
-                  <Wc />
-                </CardIcon>
-                <h3 className={classes.cardTitle}>
-                  {temperatureBedroom} °C
-                </h3>
-                <h3 className={classes.cardTitle}>
-                  {humidityBedroom} %
-                </h3>
-              </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  {/* <LocalOffer /> */}
-                  Bed Room
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={6} md={3}>
-            <Card>
               <CardHeader color="info" stats icon>
                 <CardIcon color="info">
                   <Kitchen />
@@ -212,6 +195,27 @@ class HomePage extends React.Component {
                 <div className={classes.stats}>
                   Vlad's Room
                 </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={6} md={3}>
+            <Card>
+              <CardHeader color="rose" stats icon>
+                <CardIcon color="rose">
+                  <Wc />
+                </CardIcon>
+                <h3 className={classes.cardTitle}>
+                  {temperatureBathroom} °C
+              </h3>
+                <h3 className={classes.cardTitle}>
+                  {humidityBathroom} %
+              </h3>
+              </CardHeader>
+              <CardFooter stats>
+                <div className={classes.stats}>
+                  {/* <LocalOffer /> */}
+                  Bath Room
+              </div>
               </CardFooter>
             </Card>
           </GridItem>
