@@ -19,8 +19,16 @@ function toggleLiving() {
   socket.emit('toggleLiving');
 }
 
+function getTemperatures(){
+  socket.emit('getTemperatures');
+}
+function subscribeToTemperatures(cb){
+  socket.on('temperatures', data => cb({ tremperatures: data }));
+}
 export {
   subscribeToTemperature,
   subscribeToHumidity,
   toggleLiving,
+  getTemperatures,
+  subscribeToTemperatures,
 }

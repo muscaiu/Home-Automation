@@ -27,7 +27,9 @@ import { ThermostatBase } from '../Thermostat';
 import {
   subscribeToTemperature,
   subscribeToHumidity,
-  toggleLiving
+  toggleLiving,
+  getTemperatures,
+  subscribeToTemperatures,
 } from '../../subscribers/subscribeToSensor';
 
 class HomePage extends React.Component {
@@ -73,6 +75,10 @@ class HomePage extends React.Component {
       }
     })
 
+    getTemperatures();
+    subscribeToTemperatures(data => {
+      console.log('subscribeToTemperatures', data)
+    })
     // this.props.firebase.initializePushNotifications()
   }
 
