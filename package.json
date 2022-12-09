@@ -10,7 +10,7 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "cron": "^1.7.0",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "firebase": "^5.8.5",
     "firebase-admin": "^7.0.0",
     "homebridge-mi-hygrothermograph": "^2.2.1",
